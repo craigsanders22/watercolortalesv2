@@ -1,10 +1,11 @@
 # Decap CMS: the editor Laura uses at laurawinslow.com/admin
 # Log-in is Netlify Identity (email + password) through Git Gateway.
-# Every "Publish" saves a commit to the main branch and Netlify rebuilds the site.
+# Every "Publish" saves a commit to the branch below and Netlify rebuilds the site.
+# This must match the Netlify project's production branch.
 
 backend:
   name: git-gateway
-  branch: main
+  branch: redesign-2026
 
 # Run `npm run cms` alongside `npm start` to try the editor locally without logging in.
 local_backend: true
