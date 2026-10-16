@@ -1,0 +1,41 @@
+---
+layout: layouts/base.njk
+eleventyComputed:
+  description: "{{ title }}, {{ medium | lower }}{% if size %}, {{ size }}{% endif %}. A painting by Laura Winslow."
+  shareImage: "{{ image }}"
+---
+{%- set n = collections.paintings | neighbors(page.url) -%}
+{%- set gal = site.galleries | first -%}
+{%- set fromBook = collections.books | findBySlug(book) if book else null -%}
+<article class="wrap painting">
+	<p class="crumb"><a href="/work/">Work</a> <span aria-hidden="true">/</span> <a href="/work/{{ category }}/">{{ category | categoryLabel(categories) }}</a></p>
+	<div class="painting__grid">
+		<figure class="painting__art">
+			<span class="art__mat art__mat--large"><img src="{{ image }}" alt="{{ title }}, {{ medium | lower }} by Laura Winslow" sizes="(min-width: 60rem) 60vw, 92vw" loading="eager"></span>
+		</figure>
+		<div class="painting__label">
+			<h1 class="painting__title">{{ title }}</h1>
+			<dl class="facts">
+				<div><dt>Medium</dt><dd>{{ medium }}</dd></div>
+				{% if size %}<div><dt>Size</dt><dd>{{ size }}</dd></div>{% endif %}
+				{% if year %}<div><dt>Year</dt><dd>{{ year }}</dd></div>{% endif %}
+				{% if fromBook %}<div><dt>From</dt><dd><a href="/books/#{{ fromBook.page.fileSlug }}">{{ fromBook.data.title }}</a></dd></div>{% endif %}
+				<div><dt>Original</dt><dd>
+					{%- if original == "available" and gallery %}Available through {% if gal and gal.name == gallery %}<a href="{{ gal.url }}">{{ gallery }}</a>{% else %}{{ gallery }}{% endif %}
+					{%- elif original == "available" %}Available, <a href="/contact/?painting={{ title | urlencode }}">ask about it</a>
+					{%- elif original == "sold" %}Sold
+					{%- else %}Not for sale{% endif -%}
+				</dd></div>
+			</dl>
+			{% if content | trim %}<div class="painting__notes prose">{{ content | safe }}</div>{% endif %}
+			<p class="actions">
+				{% if etsy_url %}<a class="btn btn--solid" href="{{ etsy_url }}">Buy a print or cards on Etsy</a>{% endif %}
+				<a class="btn" href="/contact/?painting={{ title | urlencode }}">Ask about this painting</a>
+			</p>
+		</div>
+	</div>
+	<nav class="pager" aria-label="More paintings">
+		{% if n.prev %}<a class="pager__prev" href="{{ n.prev.url }}"><span>Previous</span> {{ n.prev.data.title }}</a>{% else %}<span></span>{% endif %}
+		{% if n.next %}<a class="pager__next" href="{{ n.next.url }}"><span>Next</span> {{ n.next.data.title }}</a>{% endif %}
+	</nav>
+</article>

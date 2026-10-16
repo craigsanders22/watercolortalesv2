@@ -1,0 +1,15 @@
+{
+  "intro": "",
+  "offerings": [
+    { "name": "Greeting card sets", "details": "" },
+    { "name": "Matted prints", "details": "" },
+    { "name": "Single cards", "details": "" }
+  ],
+  "terms": [
+    { "label": "Opening order minimum", "value": "" },
+    { "label": "Reorder minimum", "value": "" },
+    { "label": "Lead time", "value": "" },
+    { "label": "Payment", "value": "" }
+  ],
+  "lineSheet": ""
+}

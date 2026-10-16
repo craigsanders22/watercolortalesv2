@@ -1,0 +1,26 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: categories
+  size: 1
+  alias: cat
+permalink: "/work/{{ cat.key }}/"
+eleventyComputed:
+  title: "{{ cat.label }}"
+  description: "{{ cat.label }}: watercolor paintings by Laura Winslow."
+---
+{% from "partials/macros.njk" import artwork %}
+{%- set items = collections.paintings | inCategory(cat.key) -%}
+<div class="wrap page-head">
+	<p class="crumb"><a href="/work/">Work</a></p>
+	<h1>{{ cat.label }}</h1>
+	<p class="page-head__lede">{{ items.length }} paintings</p>
+	{% set current = cat.key %}{% include "partials/cat-nav.njk" %}
+</div>
+<div class="wrap">
+	<div class="art-grid art-grid--wall">
+		{%- for p in items %}
+		{{ artwork(p) }}
+		{%- endfor %}
+	</div>
+</div>

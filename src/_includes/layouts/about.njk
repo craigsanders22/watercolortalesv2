@@ -1,0 +1,29 @@
+---
+layout: layouts/base.njk
+---
+<div class="wrap about">
+	<div class="about__photo">
+		{% if portrait %}<img src="{{ portrait }}" alt="Laura Winslow" sizes="(min-width: 60rem) 24rem, 80vw" loading="eager">{% endif %}
+	</div>
+	<div class="about__story">
+		<h1>{{ heading or title }}</h1>
+		<div class="prose prose--story">{{ content | safe }}</div>
+
+		{% if site.galleries.length %}
+		<h2 class="about__sub">Galleries</h2>
+		<ul class="plain-list">
+			{%- for g in site.galleries %}
+			<li><a href="{{ g.url }}">{{ g.name }}</a>, {{ g.place }}</li>
+			{%- endfor %}
+		</ul>
+		{% endif %}
+
+		<h2 class="about__sub">Where to find her work</h2>
+		<ul class="plain-list">
+			{% if site.links.etsy %}<li><a href="{{ site.links.etsy }}">Prints and greeting cards on Etsy</a></li>{% endif %}
+			<li><a href="/books/">Children's books she has illustrated</a></li>
+			<li><a href="/wholesale/">Wholesale for shops</a></li>
+			{% if site.links.instagram %}<li><a href="{{ site.links.instagram }}">New paintings on Instagram</a></li>{% endif %}
+		</ul>
+	</div>
+</div>

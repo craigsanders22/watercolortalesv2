@@ -1,0 +1,43 @@
+{%- set pageTitle = (title + " | " + site.name) if title and title != site.name else (site.name + " | Watercolor artist and illustrator") -%}
+{%- set pageDesc = description or site.description -%}
+{%- set shareImg = (shareImage or site.shareImage) | absUrl(site.url) -%}
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{{ pageTitle }}</title>
+	<meta name="description" content="{{ pageDesc }}">
+	<link rel="canonical" href="{{ page.url | absUrl(site.url) }}">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="{{ site.name }}">
+	<meta property="og:title" content="{{ pageTitle }}">
+	<meta property="og:description" content="{{ pageDesc }}">
+	<meta property="og:url" content="{{ page.url | absUrl(site.url) }}">
+	<meta property="og:image" content="{{ shareImg }}">
+	<meta name="twitter:card" content="summary_large_image">
+	<script>
+		document.documentElement.classList.add("js");
+		// Netlify Identity invite and password-reset emails land on the home page; send them to the editor.
+		if (/(invite|recovery|confirmation)_token=/.test(location.hash)) location.replace("/admin/" + location.hash);
+	</script>
+	<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+	<meta name="theme-color" content="#F4F3EF">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&display=swap">
+	<link rel="stylesheet" href="/assets/css/site.css">
+	<script type="application/ld+json">
+	{"@context":"https://schema.org","@type":"Person","name":"{{ site.name }}","jobTitle":"Watercolor artist and illustrator","url":"{{ site.url }}","sameAs":[{% set comma = joiner(",") %}{% for k, v in site.links %}{% if v and k != "amazon" and k != "faireDirect" %}{{ comma() }}"{{ v }}"{% endif %}{% endfor %}]}
+	</script>
+</head>
+<body class="{{ bodyClass }}">
+	<a class="skip" href="#main">Skip to content</a>
+	{% include "partials/header.njk" %}
+	<main id="main">
+		{{ content | safe }}
+	</main>
+	{% include "partials/footer.njk" %}
+	<script src="/assets/js/site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+---
+layout: layouts/base.njk
+title: Shop
+description: Where to buy Laura Winslow's watercolor prints, greeting cards, original paintings and children's books.
+permalink: /shop/
+---
+<div class="wrap page-head">
+	<h1>Where to buy</h1>
+	<p class="page-head__lede">Laura sells through a few trusted places. Pick the one that fits what you're looking for.</p>
+</div>
+<div class="wrap">
+	<ul class="shop-list">
+		{% if site.links.etsy %}
+		<li class="shop-list__item">
+			<h2><a href="{{ site.links.etsy }}">Prints and greeting cards</a></h2>
+			<p>Card sets, matted prints and small originals from the Watercolor Tales shop on Etsy.</p>
+			<p><a class="btn btn--solid" href="{{ site.links.etsy }}">Visit the Etsy shop</a></p>
+		</li>
+		{% endif %}
+		{% for g in site.galleries %}
+		<li class="shop-list__item">
+			<h2><a href="{{ g.url }}">Original paintings</a></h2>
+			<p>Original watercolors, including illustrations from her books, at {{ g.name }} in {{ g.place }}.</p>
+			<p><a class="btn" href="{{ g.url }}">See her work at {{ g.name }}</a></p>
+		</li>
+		{% endfor %}
+		<li class="shop-list__item">
+			<h2><a href="/books/">Children's books</a></h2>
+			<p>Picture books Laura has illustrated, with links to buy each one.</p>
+			<p><a class="btn" href="/books/">See the books</a></p>
+		</li>
+		<li class="shop-list__item">
+			<h2><a href="/wholesale/">For shops and businesses</a></h2>
+			<p>Stock her cards and prints in your shop. Order on Faire or ask about ordering direct.</p>
+			<p><a class="btn" href="/wholesale/">Wholesale details</a></p>
+		</li>
+	</ul>
+</div>

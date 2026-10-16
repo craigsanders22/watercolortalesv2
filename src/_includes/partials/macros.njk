@@ -1,0 +1,28 @@
+{# Shows the value, or a visible placeholder box until it is filled in through the editor. #}
+{% macro ph(value, label) -%}
+{%- if value %}{{ value }}{% else %}<span class="placeholder">[{{ label }}]</span>{% endif -%}
+{%- endmacro %}
+
+{# A painting presented in a mat, with a gallery-style label underneath. #}
+{% macro artwork(p, sizes="(min-width: 60rem) 30vw, (min-width: 36rem) 45vw, 92vw", link=true, categories=[]) -%}
+<figure class="art">
+	{% if link %}<a class="art__link" href="{{ p.url }}">{% endif %}
+		<span class="art__mat"><img src="{{ p.data.image }}" alt="{{ p.data.title }}, {{ p.data.medium | lower }} by Laura Winslow" sizes="{{ sizes }}"></span>
+	{% if link %}</a>{% endif %}
+	<figcaption class="label">
+		<span class="label__title">{% if link %}<a href="{{ p.url }}">{{ p.data.title }}</a>{% else %}{{ p.data.title }}{% endif %}</span>
+		<span class="label__meta">{{ p.data.medium }}{% if p.data.size %}, {{ p.data.size }}{% endif %}</span>
+	</figcaption>
+</figure>
+{%- endmacro %}
+
+{% macro bookCover(b) -%}
+{% if b.data.cover %}
+	<img class="book__cover" src="{{ b.data.cover }}" alt="Cover of {{ b.data.title }}" sizes="(min-width: 48rem) 16rem, 60vw">
+{% else %}
+	<div class="book__cover book__cover--empty" role="img" aria-label="Cover image needed for {{ b.data.title }}">
+		<span>{{ b.data.title }}</span>
+		<span class="placeholder">[Cover image]</span>
+	</div>
+{% endif %}
+{%- endmacro %}

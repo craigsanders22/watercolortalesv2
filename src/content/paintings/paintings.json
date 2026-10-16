@@ -1,0 +1,1 @@
+{ "layout": "layouts/painting.njk", "permalink": "/work/{{ page.fileSlug }}/", "tags": [] }

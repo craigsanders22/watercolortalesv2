@@ -1,0 +1,27 @@
+---
+layout: layouts/base.njk
+title: Contact
+description: Get in touch with Laura Winslow about her paintings, commissions, books or wholesale.
+permalink: /contact/
+---
+<div class="wrap contact">
+	<div class="contact__info">
+		<h1>Get in touch</h1>
+		<p class="page-head__lede">Questions about a painting, a book, or stocking her cards in your shop? Send a message.</p>
+		<dl class="facts">
+			<div><dt>Email</dt><dd><a href="mailto:{{ site.email }}">{{ site.email }}</a></dd></div>
+			{% if site.showPhone and site.phone %}<div><dt>Phone</dt><dd><a href="tel:{{ site.phone }}">{{ site.phone }}</a></dd></div>{% endif %}
+			<div><dt>Studio</dt><dd>{{ site.location }}</dd></div>
+		</dl>
+		<p>Shop owners: the <a href="/wholesale/">wholesale page</a> has ordering details.</p>
+	</div>
+	<form class="form contact__form" name="contact" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="company">
+		<input type="hidden" name="form-name" value="contact">
+		<p class="hp"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
+		<label>Name <input type="text" name="name" autocomplete="name" required></label>
+		<label>Email <input type="email" name="email" autocomplete="email" required></label>
+		<label><span>About a painting? <span class="optional">(optional)</span></span> <input type="text" name="painting" id="painting-field"></label>
+		<label>Message <textarea name="message" rows="6" required></textarea></label>
+		<button class="btn btn--solid" type="submit">Send message</button>
+	</form>
+</div>

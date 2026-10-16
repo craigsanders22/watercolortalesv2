@@ -2,6 +2,11 @@
   publish = "public/"
   command = "npm run build"
 
+[build.environment]
+  NODE_VERSION = "22"
+
+# Keep resized images between builds so publishing from the editor stays fast
 [[plugins]]
-  # Installs the Lighthouse Build Plugin for all deploy contexts
-  package = "@netlify/plugin-lighthouse"
+  package = "netlify-plugin-cache"
+  [plugins.inputs]
+  paths = [".cache", "public/img"]

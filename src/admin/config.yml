@@ -1,26 +1,198 @@
+# Decap CMS: the editor Laura uses at laurawinslow.com/admin
+# Log-in is Netlify Identity (email + password) through Git Gateway.
+# Every "Publish" saves a commit to the main branch and Netlify rebuilds the site.
+
 backend:
   name: git-gateway
   branch: main
 
+# Run `npm run cms` alongside `npm start` to try the editor locally without logging in.
 local_backend: true
-# change url to a link to the image you want to use, no file paths, must be a URL
-logo_url: https://codestitch.app/frontend/images/logo.png
 
-media_folder: "public/assets/images/blog"
-public_folder: "/assets/images/blog"
+site_url: https://laurawinslow.com
+display_url: https://laurawinslow.com
+logo_url: /assets/favicon.svg
+
+media_folder: src/assets/uploads
+public_folder: /assets/uploads
 
 collections:
-  - name: "blog"
-    label: "Blog"
-    folder: "src/content/blog"
+  - name: paintings
+    label: Paintings
+    label_singular: Painting
+    description: "Add a painting: upload a photo, type the title, pick a subject, then Publish."
+    folder: src/content/paintings
     create: true
     slug: "{{slug}}"
+    media_folder: /src/assets/uploads/paintings
+    public_folder: /assets/uploads/paintings
+    summary: "{{title}}"
+    sortable_fields: ["title", "order", "category"]
+    view_filters:
+      - { label: Birds, field: category, pattern: birds }
+      - { label: Florals and still life, field: category, pattern: florals }
+      - { label: Wildlife, field: category, pattern: wildlife }
+      - { label: Landscapes and seasons, field: category, pattern: landscapes }
+      - { label: Farm life, field: category, pattern: farm }
+      - { label: Book illustrations, field: category, pattern: illustrations }
+      - { label: On the home page, field: featured, pattern: true }
     fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Description", name: "description", widget: "string" }
-      - { label: "Author", name: "author", widget: "string" }
-      - { label: "Date", name: "date", widget: "datetime" }
-      - { label: "Tags", name: "tags", widget: "list", default: ["post"] }
-      - { label: "Featured Image", name: "image", widget: "image" }
-      - { label: "Image Caption", name: "imageAlt", widget: "string" }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: Title, name: title, widget: string }
+      - { label: Photo of the painting, name: image, widget: image, hint: "A straight-on photo or scan. Large files are fine; the site resizes them." }
+      - label: Subject
+        name: category
+        widget: select
+        options:
+          - { label: Birds, value: birds }
+          - { label: Florals and still life, value: florals }
+          - { label: Wildlife, value: wildlife }
+          - { label: Landscapes and seasons, value: landscapes }
+          - { label: Farm life, value: farm }
+          - { label: Book illustrations, value: illustrations }
+      - { label: Medium, name: medium, widget: string, default: Watercolor }
+      - { label: Size, name: size, widget: string, required: false, hint: "For example: 9 x 12 in" }
+      - { label: Year, name: year, widget: string, required: false }
+      - label: Original painting
+        name: original
+        widget: select
+        default: available
+        options:
+          - { label: Available, value: available }
+          - { label: Sold, value: sold }
+          - { label: Not for sale, value: not-for-sale }
+      - { label: Gallery selling the original, name: gallery, widget: string, required: false, hint: "Leave empty if people should contact you directly." }
+      - { label: Etsy listing for prints or cards, name: etsy_url, widget: string, required: false, hint: "Paste the link to the Etsy listing, if there is one." }
+      - label: From a book
+        name: book
+        widget: relation
+        collection: books
+        search_fields: ["title"]
+        value_field: "{{slug}}"
+        display_fields: ["title"]
+        required: false
+      - { label: Show on the home page, name: featured, widget: boolean, default: false, hint: "Pick about 6 to 9 paintings." }
+      - { label: Order, name: order, widget: number, default: 100, value_type: int, hint: "Lower numbers show first." }
+      - { label: Notes about this painting, name: body, widget: markdown, required: false, buttons: ["bold", "italic", "link"], editor_components: [] }
+
+  - name: books
+    label: Children's books
+    label_singular: Book
+    folder: src/content/books
+    create: true
+    slug: "{{slug}}"
+    media_folder: /src/assets/uploads/books
+    public_folder: /assets/uploads/books
+    summary: "{{title}}{{published | ternary('', ' (hidden)')}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Subtitle, name: subtitle, widget: string, required: false }
+      - { label: Author, name: author, widget: string, required: false }
+      - { label: Publisher, name: publisher, widget: string, required: false }
+      - { label: Year, name: year, widget: string, required: false }
+      - { label: Cover, name: cover, widget: image, required: false }
+      - label: Where to buy
+        name: links
+        widget: list
+        required: false
+        summary: "{{fields.label}}"
+        fields:
+          - { label: Store name, name: label, widget: string }
+          - { label: Link, name: url, widget: string }
+      - { label: Show on the website, name: published, widget: boolean, default: true }
+      - { label: Order, name: order, widget: number, default: 10, value_type: int }
+      - { label: About the book, name: body, widget: markdown, required: false, buttons: ["bold", "italic", "link"], editor_components: [] }
+
+  - name: pages
+    label: Pages
+    files:
+      - name: home
+        label: Home page
+        file: src/_data/home.json
+        fields:
+          - label: Painting at the top
+            name: heroPainting
+            widget: relation
+            collection: paintings
+            search_fields: ["title"]
+            value_field: "{{slug}}"
+            display_fields: ["title"]
+          - { label: Introduction, name: intro, widget: text }
+          - { label: Line above the book covers, name: booksLine, widget: string, required: false }
+          - { label: Note for shop owners, name: shopsText, widget: text, required: false }
+          - { label: About Laura (short version), name: aboutTeaser, widget: list, field: { label: Paragraph, name: paragraph, widget: text } }
+
+      - name: about
+        label: About page
+        file: src/pages/about.md
+        fields:
+          - { label: Layout, name: layout, widget: hidden, default: layouts/about.njk }
+          - { label: Address, name: permalink, widget: hidden, default: /about/ }
+          - { label: Page title, name: title, widget: hidden, default: About }
+          - { label: Heading, name: heading, widget: string }
+          - { label: Search description, name: description, widget: string }
+          - { label: Portrait, name: portrait, widget: image, required: false }
+          - { label: Story, name: body, widget: markdown, buttons: ["bold", "italic", "link"], editor_components: [] }
+
+      - name: wholesale
+        label: Wholesale page
+        file: src/_data/wholesale.json
+        fields:
+          - { label: Introduction for shop owners, name: intro, widget: text, required: false }
+          - label: What shops can stock
+            name: offerings
+            widget: list
+            summary: "{{fields.name}}"
+            fields:
+              - { label: Product, name: name, widget: string }
+              - { label: Details (sizes, pack quantity, wholesale price), name: details, widget: text, required: false }
+          - label: Minimums and terms
+            name: terms
+            widget: list
+            summary: "{{fields.label}}"
+            fields:
+              - { label: Term, name: label, widget: string }
+              - { label: Value, name: value, widget: string, required: false }
+          - { label: Line sheet (PDF), name: lineSheet, widget: file, required: false, media_folder: /src/assets/uploads/files, public_folder: /assets/uploads/files }
+
+  - name: settings
+    label: Site settings
+    files:
+      - name: site
+        label: Contact and links
+        file: src/_data/site.json
+        fields:
+          - { label: Name, name: name, widget: string }
+          - { label: Shop name, name: shopName, widget: string }
+          - { label: Line under the name, name: tagline, widget: string }
+          - { label: Location, name: location, widget: string }
+          - { label: Website address, name: url, widget: hidden }
+          - { label: Email, name: email, widget: string }
+          - { label: Phone, name: phone, widget: string, required: false }
+          - { label: Show phone on the contact page, name: showPhone, widget: boolean, default: false }
+          - { label: Search description, name: description, widget: text }
+          - { label: Image for link previews, name: shareImage, widget: image, required: false }
+          - label: Links
+            name: links
+            widget: object
+            fields:
+              - { label: Etsy shop, name: etsy, widget: string, required: false }
+              - { label: Faire Direct link (0% commission), name: faireDirect, widget: string, required: false }
+              - { label: Faire shop page, name: faireShop, widget: string, required: false }
+              - { label: Amazon author page, name: amazon, widget: string, required: false }
+              - { label: Instagram, name: instagram, widget: string, required: false }
+              - { label: Pinterest, name: pinterest, widget: string, required: false }
+              - { label: Facebook, name: facebook, widget: string, required: false }
+          - label: Galleries
+            name: galleries
+            widget: list
+            summary: "{{fields.name}}"
+            fields:
+              - { label: Gallery name, name: name, widget: string }
+              - { label: Town, name: place, widget: string }
+              - { label: Link to your page, name: url, widget: string }
+          - label: Email signup
+            name: signup
+            widget: object
+            fields:
+              - { label: Heading, name: heading, widget: string, required: false }
+              - { label: Short line, name: text, widget: string, required: false }

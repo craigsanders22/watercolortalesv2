@@ -1,0 +1,19 @@
+---
+layout: layouts/base.njk
+title: Work
+description: Watercolor paintings by Laura Winslow, grouped by subject, with titles, sizes and where to buy.
+permalink: /work/
+---
+{% from "partials/macros.njk" import artwork %}
+<div class="wrap page-head">
+	<h1>Work</h1>
+	<p class="page-head__lede">{{ collections.paintings.length }} paintings. Choose a subject, or browse them all.</p>
+	{% set current = "all" %}{% include "partials/cat-nav.njk" %}
+</div>
+<div class="wrap">
+	<div class="art-grid art-grid--wall">
+		{%- for p in collections.paintings %}
+		{{ artwork(p) }}
+		{%- endfor %}
+	</div>
+</div>

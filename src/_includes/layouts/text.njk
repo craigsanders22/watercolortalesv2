@@ -1,0 +1,8 @@
+---
+layout: layouts/base.njk
+---
+<article class="wrap text-page">
+	<h1>{{ title }}</h1>
+	{% if updated %}<p class="text-page__date">Last updated {{ updated }}</p>{% endif %}
+	<div class="prose">{{ content | safe }}</div>
+</article>

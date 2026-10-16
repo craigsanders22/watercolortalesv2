@@ -1,0 +1,89 @@
+---
+layout: layouts/base.njk
+permalink: /
+bodyClass: home
+---
+{% from "partials/macros.njk" import ph, artwork, bookCover %}
+{%- set hero = collections.paintings | findBySlug(home.heroPainting) -%}
+<section class="hero">
+	<div class="wrap hero__grid">
+		{% if hero %}
+		<figure class="hero__art">
+			<a class="art__mat art__mat--hero" href="{{ hero.url }}"><img src="{{ hero.data.image }}" alt="{{ hero.data.title }}, {{ hero.data.medium | lower }} by Laura Winslow" sizes="(min-width: 60rem) 55vw, 92vw" loading="eager" fetchpriority="high"></a>
+			<figcaption class="label">
+				<span class="label__title"><a href="{{ hero.url }}">{{ hero.data.title }}</a></span>
+				<span class="label__meta">{{ hero.data.medium }}{% if hero.data.size %}, {{ hero.data.size }}{% endif %}</span>
+			</figcaption>
+		</figure>
+		{% endif %}
+		<div class="hero__text">
+			<p class="hero__tagline">{{ site.tagline }}</p>
+			<h1 class="hero__name">{{ site.name }}</h1>
+			<p class="hero__intro">{{ home.intro }}</p>
+			<p class="actions">
+				<a class="btn btn--solid" href="/work/">View the work</a>
+				<a class="btn" href="{{ site.links.etsy }}">Shop prints and cards</a>
+			</p>
+		</div>
+	</div>
+</section>
+
+<section class="section" aria-labelledby="work-heading">
+	<div class="wrap">
+		<div class="section__head">
+			<h2 id="work-heading">Selected work</h2>
+			<a class="more" href="/work/">See all {{ collections.paintings.length }} paintings</a>
+		</div>
+		<div class="art-grid art-grid--three">
+			{%- for p in collections.paintings | featured %}{% if not hero or p.url != hero.url %}
+			{{ artwork(p) }}
+			{%- endif %}{% endfor %}
+		</div>
+		<ul class="cat-links" aria-label="Browse by subject">
+			{%- for c in categories %}
+			<li><a href="/work/{{ c.key }}/">{{ c.label }}</a></li>
+			{%- endfor %}
+		</ul>
+	</div>
+</section>
+
+<section class="section section--quiet" aria-labelledby="books-heading">
+	<div class="wrap">
+		<div class="section__head">
+			<h2 id="books-heading">Children's books</h2>
+			<a class="more" href="/books/">All books and where to buy</a>
+		</div>
+		<p class="section__lede">{{ home.booksLine or "I have also illustrated a number of children's books!" }}</p>
+		<ul class="cover-row">
+			{%- for b in collections.books %}
+			<li><a href="/books/#{{ b.page.fileSlug }}">{{ bookCover(b) }}<span class="cover-row__title">{{ b.data.title }}</span></a></li>
+			{%- endfor %}
+		</ul>
+	</div>
+</section>
+
+<section class="section" aria-labelledby="shops-heading">
+	<div class="wrap shops">
+		<div>
+			<h2 id="shops-heading">For shops and businesses</h2>
+			<p>{{ ph(home.shopsText, "Wholesale pitch: from Laura") }}</p>
+		</div>
+		<p class="actions">
+			<a class="btn btn--solid" href="/wholesale/">Wholesale details</a>
+			{% if site.links.faireDirect %}<a class="btn" href="{{ site.links.faireDirect }}">Order on Faire</a>{% endif %}
+		</p>
+	</div>
+</section>
+
+<section class="section section--quiet" aria-labelledby="about-heading">
+	<div class="wrap about-teaser">
+		<img class="about-teaser__photo" src="/assets/uploads/site/laura-winslow.jpg" alt="Laura Winslow" sizes="(min-width: 48rem) 18rem, 60vw">
+		<div>
+			<h2 id="about-heading">About Laura</h2>
+			{%- for para in home.aboutTeaser %}
+			<p>{{ para }}</p>
+			{%- endfor %}
+			<p><a class="more" href="/about/">Read her story</a></p>
+		</div>
+	</div>
+</section>

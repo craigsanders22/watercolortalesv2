@@ -1,0 +1,71 @@
+---
+layout: layouts/base.njk
+title: Wholesale
+description: Wholesale greeting cards and prints from Laura Winslow's watercolors, for shops and businesses. Order on Faire or ask about ordering direct.
+permalink: /wholesale/
+---
+{% from "partials/macros.njk" import ph %}
+<div class="wrap page-head">
+	<h1>Wholesale for shops</h1>
+	<p class="page-head__lede">{{ ph(wholesale.intro, "Short intro for shop owners: from Laura") }}</p>
+</div>
+
+<div class="wrap wholesale">
+	<section class="wholesale__block" aria-labelledby="offer-heading">
+		<h2 id="offer-heading">What you can stock</h2>
+		<ul class="offer-list">
+			{%- for o in wholesale.offerings %}
+			<li><span class="offer-list__name">{{ o.name }}</span> <span class="offer-list__details">{{ ph(o.details, "Sizes, pack quantity, wholesale price") }}</span></li>
+			{%- endfor %}
+		</ul>
+	</section>
+
+	<section class="wholesale__block" aria-labelledby="terms-heading">
+		<h2 id="terms-heading">Minimums and terms</h2>
+		<dl class="facts facts--wide">
+			{%- for t in wholesale.terms %}
+			<div><dt>{{ t.label }}</dt><dd>{{ ph(t.value, "To come") }}</dd></div>
+			{%- endfor %}
+		</dl>
+	</section>
+
+	<div class="order-ways">
+		<section class="order-way" aria-labelledby="faire-heading">
+			<h2 id="faire-heading">Order on Faire</h2>
+			<p>Faire handles payment and terms for your shop. New Faire retailers who use this link get Faire's sign-up offer, and the order goes straight to Laura.</p>
+			{% if site.links.faireDirect %}
+			<p><a class="btn btn--solid" href="{{ site.links.faireDirect }}">Shop Watercolor Tales on Faire</a></p>
+			{% else %}
+			<p><span class="placeholder">[Faire Direct link]</span></p>
+			{% endif %}
+		</section>
+
+		<section class="order-way" aria-labelledby="direct-heading">
+			<h2 id="direct-heading">Order direct</h2>
+			<p>Prefer to order by email or invoice? Send a note and Laura will reply with what's available.</p>
+			{% if wholesale.lineSheet %}<p><a class="btn" href="{{ wholesale.lineSheet }}" download>Download the line sheet (PDF)</a></p>{% else %}<p><span class="placeholder">[Line sheet PDF]</span></p>{% endif %}
+		</section>
+	</div>
+
+	<section class="wholesale__form" aria-labelledby="inquiry-heading">
+		<h2 id="inquiry-heading">Wholesale inquiry</h2>
+		<form class="form" name="wholesale" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="company_url">
+			<input type="hidden" name="form-name" value="wholesale">
+			<p class="hp"><label>Leave this empty <input name="company_url" tabindex="-1" autocomplete="off"></label></p>
+			<div class="form__row">
+				<label>Your name <input type="text" name="name" autocomplete="name" required></label>
+				<label>Shop or business <input type="text" name="business" autocomplete="organization" required></label>
+			</div>
+			<div class="form__row">
+				<label>Email <input type="email" name="email" autocomplete="email" required></label>
+				<label><span>Phone <span class="optional">(optional)</span></span> <input type="tel" name="phone" autocomplete="tel"></label>
+			</div>
+			<div class="form__row">
+				<label>City and state <input type="text" name="location" autocomplete="address-level2"></label>
+				<label><span>Website or Instagram <span class="optional">(optional)</span></span> <input type="text" name="website"></label>
+			</div>
+			<label>What would you like to order? <textarea name="message" rows="5" required></textarea></label>
+			<button class="btn btn--solid" type="submit">Send inquiry</button>
+		</form>
+	</section>
+</div>

@@ -1,0 +1,38 @@
+{% if not hideSignup %}{% include "partials/signup.njk" %}{% endif %}
+<footer class="site-footer">
+	<div class="wrap site-footer__inner">
+		<div class="site-footer__id">
+			<p class="site-footer__name">{{ site.name }}</p>
+			<p>{{ site.shopName }}, {{ site.location }}</p>
+			<p><a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+		</div>
+		<nav class="site-footer__col" aria-label="Find Laura's work">
+			<p class="site-footer__head">Find her work</p>
+			<ul>
+				{% if site.links.etsy %}<li><a href="{{ site.links.etsy }}">Etsy shop</a></li>{% endif %}
+				<li><a href="/wholesale/">Wholesale on Faire</a></li>
+				<li><a href="/books/">Children's books</a></li>
+				{% for g in site.galleries %}<li><a href="{{ g.url }}">{{ g.name }}</a></li>{% endfor %}
+			</ul>
+		</nav>
+		<nav class="site-footer__col" aria-label="Follow Laura">
+			<p class="site-footer__head">Follow</p>
+			<ul>
+				{% if site.links.instagram %}<li><a href="{{ site.links.instagram }}">Instagram</a></li>{% endif %}
+				{% if site.links.pinterest %}<li><a href="{{ site.links.pinterest }}">Pinterest</a></li>{% endif %}
+				{% if site.links.facebook %}<li><a href="{{ site.links.facebook }}">Facebook</a></li>{% endif %}
+			</ul>
+		</nav>
+		<nav class="site-footer__col" aria-label="Site information">
+			<p class="site-footer__head">Site</p>
+			<ul>
+				<li><a href="/contact/">Contact</a></li>
+				<li><a href="/privacy/">Privacy policy</a></li>
+				<li><a href="/terms/">Terms of use</a></li>
+			</ul>
+		</nav>
+	</div>
+	<div class="wrap site-footer__legal">
+		<p>&copy; {{ "" | year }} {{ site.name }}. All paintings and illustrations are the artist's own work and may not be reproduced without permission.</p>
+	</div>
+</footer>

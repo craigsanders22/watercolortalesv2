@@ -1,0 +1,28 @@
+{
+  "name": "Laura Winslow",
+  "shopName": "Watercolor Tales",
+  "tagline": "watercolor artist & illustrator",
+  "location": "Carmel, Indiana",
+  "url": "https://laurawinslow.com",
+  "email": "hello@laurawinslow.com",
+  "phone": "317-250-0551",
+  "showPhone": true,
+  "description": "Watercolor paintings and children's book illustrations by Laura Winslow, an artist in Carmel, Indiana.",
+  "shareImage": "/assets/uploads/paintings/the-listening-hare.jpg",
+  "links": {
+    "etsy": "https://www.etsy.com/shop/WatercolorTales",
+    "faireDirect": "",
+    "faireShop": "",
+    "amazon": "https://www.amazon.com/s?k=Laura+Winslow+illustrator&i=stripbooks",
+    "instagram": "https://www.instagram.com/laurawinslow.dee/",
+    "pinterest": "https://www.pinterest.com/laurawinslowpaints/",
+    "facebook": ""
+  },
+  "galleries": [
+    { "name": "Sylvan Gallery", "place": "Wiscasset, Maine", "url": "https://sylvangallery.com/artist/1697-laura-winslow" }
+  ],
+  "signup": {
+    "heading": "",
+    "text": ""
+  }
+}

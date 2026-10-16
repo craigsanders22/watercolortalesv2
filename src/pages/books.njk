@@ -1,0 +1,41 @@
+---
+layout: layouts/base.njk
+title: Children's books
+description: Children's picture books illustrated in watercolor by Laura Winslow, with authors, publishers and where to buy each one.
+permalink: /books/
+---
+{% from "partials/macros.njk" import ph, artwork, bookCover %}
+<div class="wrap page-head">
+	<h1>Children's books</h1>
+	<p class="page-head__lede">Picture books illustrated in watercolor by Laura Winslow.</p>
+</div>
+<div class="wrap books">
+	{%- for b in collections.books %}
+	{%- set spreads = collections.paintings | paintingsForBook(b.page.fileSlug) -%}
+	<article class="book" id="{{ b.page.fileSlug }}">
+		<div class="book__media">{{ bookCover(b) }}</div>
+		<div class="book__body">
+			<h2 class="book__title">{{ b.data.title }}</h2>
+			{% if b.data.subtitle %}<p class="book__subtitle">{{ b.data.subtitle }}</p>{% endif %}
+			<dl class="facts">
+				<div><dt>Written by</dt><dd>{{ ph(b.data.author, "Author") }}</dd></div>
+				<div><dt>Illustrated by</dt><dd>Laura Winslow</dd></div>
+				<div><dt>Publisher</dt><dd>{{ ph(b.data.publisher, "Publisher") }}</dd></div>
+				<div><dt>Year</dt><dd>{{ ph(b.data.year, "Year") }}</dd></div>
+			</dl>
+			{% if b.content | trim %}<div class="prose">{{ b.content | safe }}</div>{% endif %}
+			{% if b.data.links and b.data.links.length %}
+			<p class="book__buy">Buy it from
+				{%- for l in b.data.links %} <a href="{{ l.url }}">{{ l.label }}</a>{% if not loop.last %},{% endif %}{% endfor %}
+			</p>
+			{% endif %}
+			{% if spreads.length %}
+			<div class="book__spreads">
+				<p class="book__spreads-head">Original illustrations from this book</p>
+				{%- for p in spreads %}{{ artwork(p, "(min-width: 48rem) 28rem, 92vw") }}{% endfor %}
+			</div>
+			{% endif %}
+		</div>
+	</article>
+	{%- endfor %}
+</div>

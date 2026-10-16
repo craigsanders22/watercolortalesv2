@@ -1,0 +1,24 @@
+{%- set nav = [
+	{ url: "/work/", label: "Work" },
+	{ url: "/books/", label: "Children's books" },
+	{ url: "/wholesale/", label: "Wholesale" },
+	{ url: "/about/", label: "About" },
+	{ url: "/shop/", label: "Shop" },
+	{ url: "/contact/", label: "Contact" }
+] -%}
+<header class="site-header">
+	<div class="wrap site-header__inner">
+		<a class="wordmark" href="/">
+			<span class="wordmark__name">{{ site.name }}</span>
+			<span class="wordmark__shop">{{ site.shopName }}</span>
+		</a>
+		<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+		<nav id="site-nav" class="site-nav" aria-label="Main">
+			<ul>
+				{%- for item in nav %}
+				<li><a href="{{ item.url }}"{% if page.url.startsWith(item.url) %} aria-current="page"{% endif %}>{{ item.label }}</a></li>
+				{%- endfor %}
+			</ul>
+		</nav>
+	</div>
+</header>

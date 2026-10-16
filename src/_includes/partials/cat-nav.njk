@@ -1,0 +1,8 @@
+<nav class="cat-nav" aria-label="Subjects">
+	<ul>
+		<li><a href="/work/"{% if current == "all" %} aria-current="page"{% endif %}>All</a></li>
+		{%- for c in categories %}
+		<li><a href="/work/{{ c.key }}/"{% if current == c.key %} aria-current="page"{% endif %}>{{ c.label }}</a></li>
+		{%- endfor %}
+	</ul>
+</nav>

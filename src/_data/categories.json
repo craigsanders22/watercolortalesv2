@@ -1,0 +1,8 @@
+[
+  { "key": "birds", "label": "Birds" },
+  { "key": "florals", "label": "Florals and still life" },
+  { "key": "wildlife", "label": "Wildlife" },
+  { "key": "landscapes", "label": "Landscapes and seasons" },
+  { "key": "farm", "label": "Farm life" },
+  { "key": "illustrations", "label": "Book illustrations" }
+]
