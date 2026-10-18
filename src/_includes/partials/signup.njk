@@ -1,9 +1,8 @@
-{% from "partials/macros.njk" import ph %}
 <section class="signup" aria-labelledby="signup-heading">
 	<div class="wrap signup__inner">
 		<div>
 			<h2 id="signup-heading" class="signup__heading">{{ site.signup.heading or "New work by email" }}</h2>
-			<p class="signup__text">{{ ph(site.signup.text, "Signup line: from Laura") }}</p>
+			<p class="signup__text">{{ site.signup.text or "Get an email when Laura shares new paintings and cards." }}</p>
 		</div>
 		<form class="signup__form" name="newsletter" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="company">
 			<input type="hidden" name="form-name" value="newsletter">

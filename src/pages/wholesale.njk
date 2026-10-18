@@ -7,7 +7,7 @@ permalink: /wholesale/
 {% from "partials/macros.njk" import ph %}
 <div class="wrap page-head">
 	<h1>Wholesale for shops</h1>
-	<p class="page-head__lede">{{ ph(wholesale.intro, "Short intro for shop owners: from Laura") }}</p>
+	<p class="page-head__lede">{{ wholesale.intro or "Laura's greeting cards and prints are available wholesale to shops and businesses. Order through Faire, or contact her to order direct." }}</p>
 </div>
 
 <div class="wrap wholesale">
@@ -15,35 +15,39 @@ permalink: /wholesale/
 		<h2 id="offer-heading">What you can stock</h2>
 		<ul class="offer-list">
 			{%- for o in wholesale.offerings %}
-			<li><span class="offer-list__name">{{ o.name }}</span> <span class="offer-list__details">{{ ph(o.details, "Sizes, pack quantity, wholesale price") }}</span></li>
+			<li><span class="offer-list__name">{{ o.name }}</span> <span class="offer-list__details">{{ o.details }}</span></li>
 			{%- endfor %}
 		</ul>
 	</section>
 
+	{%- set filledTerms = wholesale.terms | withValue -%}
+	{% if filledTerms.length %}
 	<section class="wholesale__block" aria-labelledby="terms-heading">
 		<h2 id="terms-heading">Minimums and terms</h2>
 		<dl class="facts facts--wide">
-			{%- for t in wholesale.terms %}
-			<div><dt>{{ t.label }}</dt><dd>{{ ph(t.value, "To come") }}</dd></div>
+			{%- for t in filledTerms %}
+			<div><dt>{{ t.label }}</dt><dd>{{ t.value }}</dd></div>
 			{%- endfor %}
 		</dl>
 	</section>
+	{% endif %}
 
 	<div class="order-ways">
 		<section class="order-way" aria-labelledby="faire-heading">
 			<h2 id="faire-heading">Order on Faire</h2>
-			<p>Faire handles payment and terms for your shop. New Faire retailers who use this link get Faire's sign-up offer, and the order goes straight to Laura.</p>
-			{% if site.links.faireDirect %}
-			<p><a class="btn btn--solid" href="{{ site.links.faireDirect }}">Shop Watercolor Tales on Faire</a></p>
+			<p>Faire handles payment and terms for your shop. New Faire retailers who order through Laura's link get Faire's sign-up offer, and the order goes straight to her.</p>
+			{% set faireLink = site.links.faireDirect or site.links.faireShop %}
+			{% if faireLink %}
+			<p><a class="btn btn--solid" href="{{ faireLink }}">Shop Watercolor Tales on Faire</a></p>
 			{% else %}
-			<p><span class="placeholder">[Faire Direct link]</span></p>
+			<p><a class="btn btn--solid" href="#inquiry-heading">Ask about ordering on Faire</a></p>
 			{% endif %}
 		</section>
 
 		<section class="order-way" aria-labelledby="direct-heading">
 			<h2 id="direct-heading">Order direct</h2>
-			<p>Prefer to order by email or invoice? Send a note and Laura will reply with what's available.</p>
-			{% if wholesale.lineSheet %}<p><a class="btn" href="{{ wholesale.lineSheet }}" download>Download the line sheet (PDF)</a></p>{% else %}<p><span class="placeholder">[Line sheet PDF]</span></p>{% endif %}
+			<p>Prefer to order by email or invoice? Send a note and Laura will reply with what's available and pricing.</p>
+			{% if wholesale.lineSheet %}<p><a class="btn" href="{{ wholesale.lineSheet }}" download>Download the line sheet (PDF)</a></p>{% else %}<p><a class="btn" href="#inquiry-heading">Send a wholesale inquiry</a></p>{% endif %}
 		</section>
 	</div>
 

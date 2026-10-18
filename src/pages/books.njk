@@ -18,10 +18,10 @@ permalink: /books/
 			<h2 class="book__title">{{ b.data.title }}</h2>
 			{% if b.data.subtitle %}<p class="book__subtitle">{{ b.data.subtitle }}</p>{% endif %}
 			<dl class="facts">
-				<div><dt>Written by</dt><dd>{{ ph(b.data.author, "Author") }}</dd></div>
+				{% if b.data.author %}<div><dt>Written by</dt><dd>{{ b.data.author }}</dd></div>{% endif %}
 				<div><dt>Illustrated by</dt><dd>Laura Winslow</dd></div>
-				<div><dt>Publisher</dt><dd>{{ ph(b.data.publisher, "Publisher") }}</dd></div>
-				<div><dt>Year</dt><dd>{{ ph(b.data.year, "Year") }}</dd></div>
+				{% if b.data.publisher %}<div><dt>Publisher</dt><dd>{{ b.data.publisher }}</dd></div>{% endif %}
+				{% if b.data.year %}<div><dt>Year</dt><dd>{{ b.data.year }}</dd></div>{% endif %}
 			</dl>
 			{% if b.content | trim %}<div class="prose">{{ b.content | safe }}</div>{% endif %}
 			{% if b.data.links and b.data.links.length %}

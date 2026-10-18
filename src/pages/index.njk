@@ -66,11 +66,11 @@ bodyClass: home
 	<div class="wrap shops">
 		<div>
 			<h2 id="shops-heading">For shops and businesses</h2>
-			<p>{{ ph(home.shopsText, "Wholesale pitch: from Laura") }}</p>
+			<p>{{ home.shopsText or "Laura's greeting cards and prints are available wholesale to shops and businesses, through Faire or direct." }}</p>
 		</div>
 		<p class="actions">
 			<a class="btn btn--solid" href="/wholesale/">Wholesale details</a>
-			{% if site.links.faireDirect %}<a class="btn" href="{{ site.links.faireDirect }}">Order on Faire</a>{% endif %}
+			{% if site.links.faireDirect or site.links.faireShop %}<a class="btn" href="{{ site.links.faireDirect or site.links.faireShop }}">Order on Faire</a>{% endif %}
 		</p>
 	</div>
 </section>

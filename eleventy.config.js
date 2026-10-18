@@ -39,6 +39,7 @@ export default function (eleventyConfig) {
 		const i = items.findIndex((p) => p.url === url);
 		return { prev: items[i - 1], next: items[i + 1] };
 	});
+	eleventyConfig.addFilter("withValue", (items = []) => items.filter((i) => i && i.value));
 	eleventyConfig.addFilter("year", () => new Date().getFullYear());
 	eleventyConfig.addFilter("absUrl", (url, base) => new URL(url, base).href);
 

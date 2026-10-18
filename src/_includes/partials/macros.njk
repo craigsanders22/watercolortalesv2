@@ -20,9 +20,8 @@
 {% if b.data.cover %}
 	<img class="book__cover" src="{{ b.data.cover }}" alt="Cover of {{ b.data.title }}" sizes="(min-width: 48rem) 16rem, 60vw">
 {% else %}
-	<div class="book__cover book__cover--empty" role="img" aria-label="Cover image needed for {{ b.data.title }}">
+	<div class="book__cover book__cover--empty" role="img" aria-label="{{ b.data.title }}">
 		<span>{{ b.data.title }}</span>
-		<span class="placeholder">[Cover image]</span>
 	</div>
 {% endif %}
 {%- endmacro %}

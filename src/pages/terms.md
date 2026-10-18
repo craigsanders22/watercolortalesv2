@@ -3,7 +3,7 @@ layout: layouts/text.njk
 title: Terms of use
 description: Terms for using laurawinslow.com and its images.
 permalink: /terms/
-updated: "[Date: set when published]"
+updated: "October 18, 2026"
 ---
 By using laurawinslow.com you agree to these terms.
 

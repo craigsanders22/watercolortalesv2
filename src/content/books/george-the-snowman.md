@@ -5,9 +5,7 @@ author: ""
 publisher: ""
 year: ""
 cover: ""
-links:
-  - label: "Amazon"
-    url: "https://www.amazon.com/s?k=George+the+Snowman+Laura+Winslow"
+links: []
 published: true
 order: 5
 ---

@@ -3,7 +3,7 @@ layout: layouts/text.njk
 title: Privacy policy
 description: How laurawinslow.com handles the information you share.
 permalink: /privacy/
-updated: "[Date: set when published]"
+updated: "October 18, 2026"
 ---
 This policy explains what information laurawinslow.com collects and how it is used. The site is run by Laura Winslow, doing business as Watercolor Tales, in Carmel, Indiana.
 
@@ -19,7 +19,7 @@ We use your information only to reply to you, fill wholesale requests, and send 
 
 ## Who else handles it
 
-The site is hosted by Netlify, which also receives form submissions. [Email service: name it once chosen] manages the mailing list. Purchases happen on Etsy, Faire and Amazon, under their own privacy policies.
+The site is hosted by Netlify, which also receives form submissions, including mailing list signups. Purchases happen on Etsy, Faire and Amazon, under their own privacy policies.
 
 ## Your choices
 
