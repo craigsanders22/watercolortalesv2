@@ -132,6 +132,7 @@ collections:
           - { label: Heading, name: heading, widget: string }
           - { label: Search description, name: description, widget: string }
           - { label: Portrait, name: portrait, widget: image, required: false }
+          - { label: Teaching (one line, leave empty to hide), name: teaching, widget: string, required: false }
           - { label: Story, name: body, widget: markdown, buttons: ["bold", "italic", "link"], editor_components: [] }
 
       - name: wholesale
@@ -145,14 +146,7 @@ collections:
             summary: "{{fields.name}}"
             fields:
               - { label: Product, name: name, widget: string }
-              - { label: Details (sizes, pack quantity, wholesale price), name: details, widget: text, required: false }
-          - label: Minimums and terms
-            name: terms
-            widget: list
-            summary: "{{fields.label}}"
-            fields:
-              - { label: Term, name: label, widget: string }
-              - { label: Value, name: value, widget: string, required: false }
+              - { label: Details (sizes, pack quantity), no prices, name: details, widget: text, required: false }
           - { label: Line sheet (PDF), name: lineSheet, widget: file, required: false, media_folder: /src/assets/uploads/files, public_folder: /assets/uploads/files }
 
   - name: settings

@@ -18,6 +18,11 @@ layout: layouts/base.njk
 		</ul>
 		{% endif %}
 
+		{% if teaching %}
+		<h2 class="about__sub">Teaching</h2>
+		<p>{{ teaching }}</p>
+		{% endif %}
+
 		<h2 class="about__sub">Where to find her work</h2>
 		<ul class="plain-list">
 			{% if site.links.etsy %}<li><a href="{{ site.links.etsy }}">Prints and greeting cards on Etsy</a></li>{% endif %}

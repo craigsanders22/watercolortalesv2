@@ -20,17 +20,6 @@ permalink: /wholesale/
 		</ul>
 	</section>
 
-	{%- set filledTerms = wholesale.terms | withValue -%}
-	{% if filledTerms.length %}
-	<section class="wholesale__block" aria-labelledby="terms-heading">
-		<h2 id="terms-heading">Minimums and terms</h2>
-		<dl class="facts facts--wide">
-			{%- for t in filledTerms %}
-			<div><dt>{{ t.label }}</dt><dd>{{ t.value }}</dd></div>
-			{%- endfor %}
-		</dl>
-	</section>
-	{% endif %}
 
 	<div class="order-ways">
 		<section class="order-way" aria-labelledby="faire-heading">

@@ -5,6 +5,7 @@ heading: An artistic journey
 description: Laura Winslow's story, from learning watercolor from her mother to illustrating children's books, in her own words.
 permalink: /about/
 portrait: /assets/uploads/site/laura-winslow.jpg
+teaching: "Laura also teaches watercolor workshops and private lessons in Indianapolis."
 ---
 My journey into the world of art began early in my life. As a child, my mother, Ruth Winterbottom, taught me pastels and watercolors. In my late teens I studied watercolor for three years with Edgar Whitney on Long Island.
 
