@@ -23,7 +23,7 @@ The site is hosted by Netlify, which also receives form submissions, including m
 
 ## Your choices
 
-Every email includes a link to unsubscribe. To see, correct or delete the information we hold about you, email [hello@laurawinslow.com](mailto:hello@laurawinslow.com).
+Every email includes a link to unsubscribe. To see, correct or delete the information we hold about you, email [{{ site.email }}](mailto:{{ site.email }}).
 
 ## Changes
 

@@ -37,7 +37,7 @@ Images are resized at build time (480, 960 and 1600 px, WebP and JPEG), so full-
 2. Identity → Registration → set to **Invite only**.
 3. Identity → Services → **Enable Git Gateway**.
 4. Identity → **Invite users** → Laura's email. The invite link opens the editor so she can set a password.
-5. Forms: the contact, wholesale and newsletter forms use Netlify Forms. Turn on form detection under Forms, and add an email notification so messages reach hello@laurawinslow.com.
+5. Forms: the contact, wholesale and newsletter forms use Netlify Forms. Turn on form detection under Forms, and add an email notification so messages reach watercolortalesart@gmail.com.
 
 ## How Laura adds a painting
 

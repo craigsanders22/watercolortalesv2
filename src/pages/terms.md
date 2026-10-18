@@ -21,4 +21,4 @@ We try to keep titles, sizes and availability up to date, but colors can look di
 
 ## Contact
 
-Questions about these terms can go to [hello@laurawinslow.com](mailto:hello@laurawinslow.com).
+Questions about these terms can go to [{{ site.email }}](mailto:{{ site.email }}).
